@@ -8,9 +8,6 @@ Ergebnisses kommt. Viele Medizinische Zeitschriften verlangen bereits einen korr
 eine Rechtfertigung für den gewählten statistischen Ansatz. \autocite[163]{Lee2014} 
 Eine wichtige Methode zur Behandlung von fehlenden Daten ist die Multiple Imputation (MI).
 
-Die Multiple Imputation (MI) ist ein statistisches Verfahren, in welchem fehlende Daten anhand einer 
-Wahrscheinlichkeitsverteilung mehrfach ersetzt und gemittelt werden. \autocite[163]{Lee2014}
-
 Ziel dieser Arbeit ist es, einen Überblick über die MI im Medizinischen Bereich zu geben. Neben einer 
 Erklärung der MI, wird auf wichtige Fragestellungen bei der Durchführung der MI eingegangen.
 
@@ -31,21 +28,27 @@ Angenommen es würde eine Studie über den Zusammenhang zwischen Blutdruck und d
 Dabei fehlen die Blutdruck Daten bei einigen Herzinfarkt-Patienten. Man kann nun aufgrund der anderen Daten die 
 gesammelt wurden Rückschluss auf die fehlenden Daten ziehen. So können z.B. die fehlenden Blutdruck-Daten einiger 
 Patienten ersetzt werden, indem andere Patienten mit gleichen Eigenschaften gesucht werden. Bei Patienten mit gleichen 
-Eigenschaften (z.B. gleiches Alter, gleicher BMI) steigt auch die Wahrscheinlichkeit, dass der Puls-Wert ähnlich ist. 
+Eigenschaften (z.B. gleiches Alter, gleicher BMI) steigt auch die Wahrscheinlichkeit, dass der Blutdruck-Wert ähnlich ist. 
 
 Allerdings kann diese Vorgehensweise aufwändig werden. Vor allem, wenn es sehr viele Variablen gibt. Es wird z.B. 
 schwierig werden, einen Patienten mit genau dem selben BMI, Alter, Blutdruck, Geschlecht etc. zu finden. Daher wird in 
 der MI versucht, anhand der vorhandenen Daten und einer Verteilungsfunktion eine Vermutung über den fehlenden Wert zu 
-bekommen. Man könnte z.B. davon ausgehen, dass die Pulswerte der Bevölkerung Normalverteilt sind. Aufgrund dieser Vermutung 
-kann der Mittelwert aller Pulswerte gebildet und für die fehlenden Daten eingesetzt werden. Für Komplexere Sachverhalte ist 
+bekommen. Man könnte z.B. davon ausgehen, dass die Blutdruckwerte der Bevölkerung Normalverteilt sind. Aufgrund dieser Vermutung 
+kann der Mittelwert aller Blutdruckwerte gebildet und für die fehlenden Daten eingesetzt werden. Für Komplexere Sachverhalte ist 
 dieses Vorgehen allerdings nicht ausreichend. \autocite[1089]{Donders2006}
 
+
+%TODO Andere Quelle hernehmen: Methoden werden in (M.Spratt beschrieben) 
 Um den gesamten Sachverhalt besser darstellen zu können, werden z.B. mehrere voneinander abhängige Regressionsmodelle 
 (Conditional Regression Models) oder eine Mehrdimensionale Normalverteilung (Joint Normal Distribution) benötigt. Damit 
 werden mehrere Eigenschaften/Variablen berücksichtigt. \autocite[164]{Lee2014}.  Aus so einem Modell werden die 
-Werte nun nicht nur einmal, sondern mehrfach imputiert. Für die Studie könnte z.B. ein Conditional Regression Modell erstellt 
-werden, dass das Risiko eines Herzinfarktes bezogen auf Alter, Blutdruck, BMI, etc. darstellt. Werden nun aus diesem 
-Regressions Modell mehrfach Schätzwerte gezogen und diese Schätzwerte dann kombiniert, handelt es sich um eine MI. 
+Werte nun nicht nur einmal, sondern mehrfach imputiert. Für die Studie könnten die Daten z.B. mit  
+
+%TODO chained equations anhand von Beispiel beschrieben (z.B. mithilfe von K.Tilling oder YT (Rachit Toshniwal)) 
+Für die Studie könnte z.B. ein Conditional Regression Modell erstellt 
+werden, dass das Risiko eines Herzinfarktes bezogen auf Alter, Blutdruck, BMI, etc. darstellt. 
+Werden nun aus diesem Regressions Modell mehrfach Schätzwerte gezogen und diese Schätzwerte dann kombiniert, handelt es sich um eine MI. 
+
 
 \subsection{Funktionsweise der MI}
 
@@ -67,7 +70,9 @@ würde sich um eine Normalverteilung handeln, dann würden die fehlenden Daten v
 \end{equation}
 „$Y_{(mis)}$ ist ein Schätzwert für den fehlenden Wert. $\sim N$ bezeichnet die Normalverteilung, $\widehat{Y}$ ist der vorhergesagte Wert aus 
 einer Regressionsgleichung und $\sigma_\varepsilon^2$ ist die Residuenvarianz aus der Regression.“ \autocite[8]{Enders2017}  Die Varianz definiert 
-den Mittelwert sowie die Streuung. Insgesamt ist die Imputation aus einer Gleichung die Summe eines Abweichungswertes 
+den Mittelwert sowie die Streuung. 
+%TODO Näher Beschreiben/ Beispiel und eventl. auf die Chained Equation näher eingehen
+Insgesamt ist die Imputation aus einer Gleichung die Summe eines Abweichungswertes 
 (Varianz) und des vorhergesagten Wertes. \autocite[8]{Enders2017} Um fehlende Daten in mehreren Variablen zu brücksichtigen 
 werden komplexere Regressionsmodelle, wie das Conditional Regression Model oder die Joint Normal Distribution benötigt. 
 Das Zufällige ziehen von Schätzungen zu den fehlenden Werten wird mehrfach wiederholt, wodurch mehrere Vollständige 
@@ -226,7 +231,7 @@ bereits erwähnt wurde, zeigt auch die Bedeutung von Post-Baseline Untersuchunge
 	\label{figure:study}
 \end{figure*}
 
-
+%TODO Auxiliary Variables anhand von (J. Graham und R.Hughes) näher beschreiben
 \subsection{Hilfsvariablen}
 
 Unter Hilfsvariablen (engl.: auxiliary variables) versteht man Variablen, welche dem Datensatz im Nachhinein hinzugefügt werden, 
@@ -253,11 +258,13 @@ dass das Ergebnis nicht biased ist. Vor allem wenn nicht klar ist, ob es sich be
 Daten handelt. Es gibt einige Möglichkeiten, um die Qualität der MI zu Überprüfen und damit auch eine Abschätzung über einen 
 Möglichen bias zu geben. Im Folgenden werden diese 
 
+%TODO Standard Error näher anhand von (R. Hughes) beschreiben und Beispiel geben
 \subsection{Standard Error und P-Value}
 
 Standardmäßig wird in der MI der Standard Error berechnet. Der Standarderror ist ein Maß für die Unsicherheit der 
 geschätzten Werte. \autocite[1098]{Donders2006} 
 
+%TODO p-value näher andhand von S.Richter beschreiben (Threshold) und Beispiel geben
 Des Weiteren kann der P-Wert berechnet werden. Der P-Wert ist ein Wert zwischen 0 und 1. Je höher der P-Wert ist, 
 desto höher ist die Wahrscheinlichkeit, dass die Ergebnisse Zufall sind. Ein niedriger 
 P-Wert ist in der MI daher anzustreben. 
@@ -273,18 +280,19 @@ Bestimmung der exakten Übereinstimmungsrate. Hierbei wird der Anteil von exakte
 und originalen Werten bestimmt. Des Weiteren kann Spearmans Korrelationskoeffizient, oder die Mittlere (Absolute) Abweichung 
 bestimmt werden. \autocite[3664]{Young-Saver2018} 
 
+%Feedback Christoph: Beispiel für eine Sensitivitätsanalyse geben
 \subsection{Sensitivitätsanalyse}
 
 Vor der Durchführung der MI sollte eine Vermutung über die Art der fehlenden Daten gemacht werden. Sind die Daten MAR, MNAR 
 oder MCAR? Angenommen es gibt eine Studie, die den Zusammenhang zwischen Blutdruck und Herz-Kreislauferkrankungen untersucht. 
-Sllte ein Teil der Patienten diese Studie vorzeitig verlassen, könnte man vermuten, dass dies komplett zufällig geschieht. 
+Sollte ein Teil der Patienten diese Studie vorzeitig verlassen, könnte man vermuten, dass dies komplett zufällig geschieht. 
 Die Daten wären somit MCAR. Es könnte aber auch sein, dass einige Patienten die Studie aufgrund von Kopfschmerzen wegen zu 
 hohen Blutdrucks verlassen. Damit gäbe es einen systematischen Zusammenhang und die Daten währen MAR oder MNAR. In vielen 
 Studien ist es schwer, eine sichere Vermutung über die Art der fehlenden Daten zu treffen. Mit Sensitivitätsanalysen können 
-mehrere Vermutungen über die Art der fehlenden Daten überprüft werden. \autocite[2815]{Cro2020} (Cro, Suzie, 2020)
+mehrere Vermutungen über die Art der fehlenden Daten überprüft werden. \autocite[2815]{Cro2020}
 
 Im Allgemeinen gibt es 2 Varianten der Sensitivitätsanalyse: $\delta$-basiert und referenzbasiert. In der $\delta$-basierten Variante 
-wird dem zu Erwarteten Wert noch ein Offset Variable $\delta$(Delta) hinzugefügt, welche den Einfluss von 
+wird dem zu erwarteten Wert noch ein Offset Variable $\delta$(Delta) hinzugefügt, welche den Einfluss von 
 fehlenden/nicht-beobachteten Teilnehmern bewertet.  In der Referenzbasierten Sensitivitätsanalyse werden Werte aus 
 anderen Gruppen des Versuchs imputiert, welche Referenz zu den Beobachteten Werten beinhaltet. \autocite[2815]{Cro2020} 
 Eine praktische Beschreibung der Durchführung der Sensitivitätsanalyse in Verbindung mit der MI kann in 
