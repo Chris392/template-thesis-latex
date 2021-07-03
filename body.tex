@@ -31,23 +31,25 @@ Patienten ersetzt werden, indem andere Patienten mit gleichen Eigenschaften gesu
 Eigenschaften (z.B. gleiches Alter, gleicher BMI) steigt auch die Wahrscheinlichkeit, dass der Blutdruck-Wert ähnlich ist. 
 
 Allerdings kann diese Vorgehensweise aufwändig werden. Vor allem, wenn es sehr viele Variablen gibt. Es wird z.B. 
-schwierig werden, einen Patienten mit genau dem selben BMI, Alter, Blutdruck, Geschlecht etc. zu finden. Daher wird in 
+schwierig werden, einen Patienten mit genau dem selben BMI, Alter, Blutdruck etc. zu finden. Daher wird in 
 der MI versucht, anhand der vorhandenen Daten und einer Verteilungsfunktion eine Vermutung über den fehlenden Wert zu 
 bekommen. Man könnte z.B. davon ausgehen, dass die Blutdruckwerte der Bevölkerung Normalverteilt sind. Aufgrund dieser Vermutung 
 kann der Mittelwert aller Blutdruckwerte gebildet und für die fehlenden Daten eingesetzt werden. Für Komplexere Sachverhalte ist 
 dieses Vorgehen allerdings nicht ausreichend. \autocite[1089]{Donders2006}
 
-
-%TODO Andere Quelle hernehmen: Methoden werden in (M.Spratt beschrieben) 
 Um den gesamten Sachverhalt besser darstellen zu können, werden z.B. mehrere voneinander abhängige Regressionsmodelle 
-(Conditional Regression Models) oder eine Mehrdimensionale Normalverteilung (Joint Normal Distribution) benötigt. Damit 
-werden mehrere Eigenschaften/Variablen berücksichtigt. \autocite[164]{Lee2014}.  Aus so einem Modell werden die 
-Werte nun nicht nur einmal, sondern mehrfach imputiert. Für die Studie könnten die Daten z.B. mit  
+(Chained Equations) oder eine Mehrdimensionale Normalverteilung (Multivariate Normal Imputation) benötigt. \autocite[489]{Spratt2010} Damit 
+werden mehrere Eigenschaften/Variablen berücksichtigt. Für die Studie könnten die Daten z.B. mithilfe von Chained Equations imputiert werden. Im Folgenden wird
+die Chained-Equation Methode anhand eines einfachen Beispiels näher erläutert:
 
-%TODO chained equations anhand von Beispiel beschrieben (z.B. mithilfe von K.Tilling oder YT (Rachit Toshniwal)) 
-Für die Studie könnte z.B. ein Conditional Regression Modell erstellt 
-werden, dass das Risiko eines Herzinfarktes bezogen auf Alter, Blutdruck, BMI, etc. darstellt. 
-Werden nun aus diesem Regressions Modell mehrfach Schätzwerte gezogen und diese Schätzwerte dann kombiniert, handelt es sich um eine MI. 
+In der Chained-Equation Methode werden mehrere Imputationen auf einzelnen Variablen durchgeführt. Angenommen es gibt die Variablen BMI, Alter, Blutdruck. 
+In allen Variablen gibt es fehlende Daten. Zu Beginn kann für die fehlenden Daten z.B. einfach der Mittelwert eingesetzt werden. Also für alle fehlenden 
+BMI-Daten wird der Mittelwert der BMI-Werte eingesetzt. Dasselbe passiert für Alter und Blutdruck. Danach wird auf jede Variable jeweils eine Imputation durchgeführt. 
+Angenommen es werden zuerst die fehlenden BMI-Daten imputiert. Dazu werden zuerst die bereits vorhandenen imputierten Werte (im Falle des ersten Durchlaufs die Mittelwerte)
+der BMI-Variable gelöscht. Es wird daraufhin ein Regressionsmodell mit den BMI-Werten im Verhältnis zu Alter und Blutdruck erstellt. Angenommen es wird der BMI-Wert
+eines 60-Jährigen mit einem Blutdruckwert von 140-90 gesucht. Anhand des Regressionsmodells kann man nun ablesen, dass der BMI in Bezug auf Alter und Blutdruck 27 beträgt.
+Dieser Wert wird nun für den fehlenden Wert eingesetzt. Dasselbe passiert mit dem Alter im Bezug auf BMI und Blutdruck und dem Blutdruck in Bezug auf Alter und BMI. Dadurch
+entsteht ein neuer Datensatz. Auf diesen neuen Datensatz wird der Vorgang nun mehrmals wiederholt. \autocite[108]{Tilling2016}   
 
 
 \subsection{Funktionsweise der MI}
@@ -69,12 +71,11 @@ würde sich um eine Normalverteilung handeln, dann würden die fehlenden Daten v
  Y_{(mis)}\sim N(\widehat{Y}, \sigma_\varepsilon^2)
 \end{equation}
 „$Y_{(mis)}$ ist ein Schätzwert für den fehlenden Wert. $\sim N$ bezeichnet die Normalverteilung, $\widehat{Y}$ ist der vorhergesagte Wert aus 
-einer Regressionsgleichung und $\sigma_\varepsilon^2$ ist die Residuenvarianz aus der Regression.“ \autocite[8]{Enders2017}  Die Varianz definiert 
-den Mittelwert sowie die Streuung. 
-%TODO Näher Beschreiben/ Beispiel und eventl. auf die Chained Equation näher eingehen
+einer Regressionsgleichung und $\sigma_\varepsilon^2$ ist die Residuenvarianz aus der Regression.“ \autocite[8]{Enders2017}  Die Normalverteilung
+stellt die Verteilung einer Variable, z.B. des Blutdrucks im Verhältnis zu abhängigen Variablen dar. Die Varianz definiert den Mittelwert sowie die Streuung. 
 Insgesamt ist die Imputation aus einer Gleichung die Summe eines Abweichungswertes 
-(Varianz) und des vorhergesagten Wertes. \autocite[8]{Enders2017} Um fehlende Daten in mehreren Variablen zu brücksichtigen 
-werden komplexere Regressionsmodelle, wie das Conditional Regression Model oder die Joint Normal Distribution benötigt. 
+(Varianz) und des vorhergesagten Wertes. \autocite[8]{Enders2017}. Der Schätzwert für einen fehlenden Wert wird also berechnet, indem man einen 
+Wert entsprechend der abhängigen Variablen aus dem Bereich einer Gleichung zieht. Der Bereich wird dabei durch die Varianz bestimmt, die die Unsicherheit der Daten angibt.
 Das Zufällige ziehen von Schätzungen zu den fehlenden Werten wird mehrfach wiederholt, wodurch mehrere Vollständige 
 Datensätze entstehen, auf denen daraufhin die Analyse durchgeführt wird. \autocite[163 ff.]{Lee2014} Durch das 
 wiederholen der Imputationen mit unterschiedlichen, plausiblen Regressions-Parametern, gleichen die Datensätze keiner 
@@ -94,7 +95,8 @@ sowie der Joint Normal Distribution. \autocite[164]{Lee2014}. Da dieses Paper ei
 geben soll, wird auf die genaue Implementation nicht mehr eingegagnen. 
 
 Eine Implemetation der MI kann in \textcite[]{Royston2005} gefunden werden. Dort wird die Implementierung der MI in der MICE Methode 
-näher anhand von ado-Dateien erläutert. Ado-Dateien sind Dateien, welche vom Statistik Programm Stata vewendet werden.
+näher erläutert. Die MICE-Methode basiert auf Chained-Equations. Die Implementation wird anhand von Ado-Datein beschrieben.
+Ado-Dateien sind Dateien, welche vom Statistik Programm Stata vewendet werden.
 
 \subsection{Vorgehensweise MI}
 
@@ -115,7 +117,7 @@ stützt, ist allerdings gering. \autocite[63 f.]{Madley-Dowd2019}
 
 In der Studie “The proportion of missing data should not be used to guide decisions on multiple imputation” wird 
 argumentiert, dass der Anteil an fehlenden Daten nicht unbedingt ausschlaggebend für den Erfolg oder Misserfolg der 
-MI steht. Viel mehr spielen die Art der fehlenden Daten und die Verwendung von auxilliary Variablen eine wichtige Rolle. 
+MI steht. Viel mehr spielen die Art der fehlenden Daten und die Verwendung von Hilfsvariablen eine wichtige Rolle. 
 
 \section{Art der fehlenden Daten}
 \label{section:descriptor_of_missingness}
@@ -234,13 +236,23 @@ bereits erwähnt wurde, zeigt auch die Bedeutung von Post-Baseline Untersuchunge
 %TODO Auxiliary Variables anhand von (J. Graham und R.Hughes) näher beschreiben
 \subsection{Hilfsvariablen}
 
-Unter Hilfsvariablen (engl.: auxiliary variables) versteht man Variablen, welche dem Datensatz im Nachhinein hinzugefügt werden, 
-um die Menge an Information zu erhöhen. Auxilliary Variablen können z.B. aus anderen Studien/Datensätzen 
-herangezogen werden.
+Unter Hilfsvariablen (engl.: auxiliary variables) versteht man Variablen, welche dem Datensatz hinzugefügt werden, um bei der Imputation zu helfen. \autocite[211]{Graham2007}
+Durch Hilfsvariablen wird die Menge an Information erhöht, wodurch im Optimalfall die Imputation verbessert werden soll.
+Hilfsvariablen können z.B. aus anderen Studien/Datensätzen herangezogen werden.
 
-Eine Simulation in \textcite[]{Madley-Dowd2019} zeigt die Bedeutung der Auxilliary Variablen. 
+Eine Simulation in \textcite[]{Madley-Dowd2019} zeigt die Bedeutung der Hilfsvariablen. 
 Die Simulation wurde anhand von Daten aus ALSPAC (Avon Longitudinal Study of Parents and Children) 
-durchgeführt.
+durchgeführt. In der ALSPAC Studie wurde die Auswirkung von Rauchen während der Schwangerschaft auf den Intelligenzquotionten des Kindes untersucht. Als Variablen wurde
+der IQ im Alter von 15 Jahren und ein Binärwert für das Rauchen während der Schwangerschaft verwendet. Als Hilfsvariablen wurde der IQ im Alter von 8 Jahren, die Verständlichkeit 
+und der Redefluss im Alter von 9 Jahren, ein Binärwert für das Vorhandensein von Lernschwierigkeiten sowie die Mathematik- und Lesefähigkeiten des Kindes im 6. Schuljahr verwendet. 
+Unter der Miteinbeziehung der Hilfsvariablen bei der MI verrigerte sich der Standard Error im Vergleich zur MI ohne Hilfsvariablen von 0.504 auf 0.461. Der FMI (Fraction of Missing Information)
+verringerte sich von 0.724 auf 0.664. \autocite[]{Madley-Dowd2019} Der FMI ist ein Paramter, der den Verlust an Informationen darstellt. Der FMI kann zwischen 0 und 1 liegen, 
+ein niedriger FMI ist anzustreben.
+\autocite[65]{Madley-Dowd2019} Die Begriffe Standarderror sowie Bias werden im nächsten Kapitel (Kapitel \ref{section:qualtity}) näher beschrieben. 
+Man sieht anhand der Reduktion von FMI und Standarderror, dass sich Hilfsvariablen positiv auf die MI auswirken können.
+
+%TODO Wovon hängt es ab, wie positiv der Einfluss von Auxiliary Variablen ist?
+
 
 
 \section{Qualitätsfeststellung MI}
@@ -310,7 +322,7 @@ Im Zweiten Schritt sollte die zu verwendende Imputations-Methode, sowie die Verw
 werden. 
 Handelt es sich um MCAR Daten, kann der Einsatz einer CCA überlegt werden. Gibt es relevante, zeitnahe Untersuchungen 
 zu den fehlenden Daten, kann auch die Verwendung der Single Imputation in der LOCF-Variante gute Ergebnisse erzielen. 
-Das Hinzufügen von Post-Baseline Untersuchungen oder Auxilliary Variablen kann das Resultat der MI verbessern. 
+Das Hinzufügen von Post-Baseline Untersuchungen oder Hilfsvariablen kann das Resultat der MI verbessern. 
 
 Nach der Durchführung der MI ist es zu empfehlen, eine Sensitiviätsanalyse durchzuführen. Vor allem, wenn es sich nicht 
 sicher um MAR Daten handelt. Der Standard Error sowie der P-Value sollten nicht zu hoch sein, da hohe Werte auf ein 
