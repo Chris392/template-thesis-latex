@@ -57,7 +57,7 @@ entsteht ein neuer Datensatz. Auf diesen neuen Datensatz wird der Vorgang nun me
 Ausgangspunkt der MI ist das Analysis Modell. Das Analysis Modell ist ein Datensatz, in welchem Daten verschiedener Variablen 
 fehlen können. In der ersten Phase der MI wird aus dem Analysis Modell ein Imputation Modell erstellt. Dazu werden dem 
 Analysis Model noch zusätzliche Variablen, sogenannte auxiliary variables (Hilfsvariablen) hinzugefügt. Die fehlenden 
-Daten werden darauf hin z.B. mit Hilfe eines Regressionmodells mehrfach imputiert. Durch die mehrfache Imputation enstehen 
+Daten werden daraufhin z.B. mit Hilfe der Chained-Equations mehrfach imputiert. Durch die mehrfache Imputation enstehen 
 mehrere Vervollständigte Datensätze. In der zweiten Phase werden die Vervollständigten Datensätzte analysiert und gemittelt, 
 wodurch der finale Datensatz ermittelt wird. Durch die Berechnung des Standard Errors kann die Unsicherheit der Daten 
 ermittelt werden. \autocite[163]{Lee2014} Im Folgenden wird auf die beiden Phasen der MI näher eingegangen.
@@ -233,12 +233,12 @@ bereits erwähnt wurde, zeigt auch die Bedeutung von Post-Baseline Untersuchunge
 	\label{figure:study}
 \end{figure*}
 
-%TODO Auxiliary Variables anhand von (J. Graham und R.Hughes) näher beschreiben
+%TODO Eventl. ersten Satz löschen
 \subsection{Hilfsvariablen}
 
 Unter Hilfsvariablen (engl.: auxiliary variables) versteht man Variablen, welche dem Datensatz hinzugefügt werden, um bei der Imputation zu helfen. \autocite[211]{Graham2007}
 Durch Hilfsvariablen wird die Menge an Information erhöht, wodurch im Optimalfall die Imputation verbessert werden soll.
-Hilfsvariablen können z.B. aus anderen Studien/Datensätzen herangezogen werden.
+Hilfsvariablen können z.B. auch aus anderen Studien/Datensätzen herangezogen werden.
 
 Eine Simulation in \textcite[]{Madley-Dowd2019} zeigt die Bedeutung der Hilfsvariablen. 
 Die Simulation wurde anhand von Daten aus ALSPAC (Avon Longitudinal Study of Parents and Children) 
@@ -246,12 +246,18 @@ durchgeführt. In der ALSPAC Studie wurde die Auswirkung von Rauchen während de
 der IQ im Alter von 15 Jahren und ein Binärwert für das Rauchen während der Schwangerschaft verwendet. Als Hilfsvariablen wurde der IQ im Alter von 8 Jahren, die Verständlichkeit 
 und der Redefluss im Alter von 9 Jahren, ein Binärwert für das Vorhandensein von Lernschwierigkeiten sowie die Mathematik- und Lesefähigkeiten des Kindes im 6. Schuljahr verwendet. 
 Unter der Miteinbeziehung der Hilfsvariablen bei der MI verrigerte sich der Standard Error im Vergleich zur MI ohne Hilfsvariablen von 0.504 auf 0.461. Der FMI (Fraction of Missing Information)
-verringerte sich von 0.724 auf 0.664. \autocite[]{Madley-Dowd2019} Der FMI ist ein Paramter, der den Verlust an Informationen darstellt. Der FMI kann zwischen 0 und 1 liegen, 
+verringerte sich von 0.724 auf 0.664. \autocite[71]{Madley-Dowd2019} Der FMI ist ein Paramter, der den Verlust an Informationen darstellt. Der FMI kann zwischen 0 und 1 liegen, 
 ein niedriger FMI ist anzustreben.
 \autocite[65]{Madley-Dowd2019} Die Begriffe Standarderror sowie Bias werden im nächsten Kapitel (Kapitel \ref{section:qualtity}) näher beschrieben. 
-Man sieht anhand der Reduktion von FMI und Standarderror, dass sich Hilfsvariablen positiv auf die MI auswirken können.
 
-%TODO Wovon hängt es ab, wie positiv der Einfluss von Auxiliary Variablen ist?
+
+Man sieht anhand der Reduktion von FMI und Standarderror, dass sich Hilfsvariablen positiv auf die MI auswirken können. Ausschlaggebend für den Effekt von Hilfsvariablen
+ist u.a. ob die Hilfsvariable genügend Information über die fehlenden Werte bereitstellt. \autocite[1302]{Hughes2019} Ein Indikator für den Effekt einer Hilfsvariable auf 
+die MI ist die Reduktion des Standarderrors. In der Studie von \textcite[]{Madley-Dowd2019} reduzierte sich der Standarderror bei der Hinzugabe der Hilfsvariable 
+"IQ im Alter von 8 Jahren" um 7.65\%. Wurde die Hilfsvariable "Learning Disablities" hinzugefügt, erhöhte sich der Standarderror um 0,8\%. \autocite[71]{Madley-Dowd2019} 
+Dies zeigt, dass nicht alle Hilfsvariablen zwingend den Informationsgehalt und damit die Genauigkeit des Ergebnisses verbessern. 
+Eine sorgfältige Überprüfung/Auswahl von Hilfsvariablen ist daher von Vorteil. 
+
 
 
 
@@ -270,13 +276,16 @@ dass das Ergebnis nicht biased ist. Vor allem wenn nicht klar ist, ob es sich be
 Daten handelt. Es gibt einige Möglichkeiten, um die Qualität der MI zu Überprüfen und damit auch eine Abschätzung über einen 
 Möglichen bias zu geben. Im Folgenden werden diese 
 
-%TODO Standard Error näher anhand von (R. Hughes) beschreiben und Beispiel geben
 \subsection{Standard Error und P-Value}
 
 Standardmäßig wird in der MI der Standard Error berechnet. Der Standarderror ist ein Maß für die Unsicherheit der 
-geschätzten Werte. \autocite[1098]{Donders2006} 
+geschätzten Werte. \autocite[1098]{Donders2006} Der Standarderror ist somit auch ein Indikator für den Informationsverlust durch fehlende Daten. \autocite[1298]{Hughes2019}
+Angenommen es gibt in einer Studie fehlende Blutdruckwerte. Die Blutdruckwerte werden nun 3x mithilfe verschiedener Stichproben und Parametern anhand einer Regression imputiert.
+Es entstehen somit 3 komplette Datensätze mit jeweils unterschiedlichen imputierten Blutdruckwerten. Ist der Mittelwert der imputierten Blutdruckwerte zwischen den 3 kompletten
+Datensätzten sehr unterschiedlich, dann wird der Standarderror hoch sein. Daraus kann man schließen, dass es eine hohe Unsicherheit in der Genauigkeit der Blutdruckdaten gibt und
+somit womöglich ein Bias vorhanden ist.   
 
-%TODO p-value näher andhand von S.Richter beschreiben (Threshold) und Beispiel geben
+%TODO p-value näher anhand von S.Richter beschreiben (Threshold) und Beispiel geben
 Des Weiteren kann der P-Wert berechnet werden. Der P-Wert ist ein Wert zwischen 0 und 1. Je höher der P-Wert ist, 
 desto höher ist die Wahrscheinlichkeit, dass die Ergebnisse Zufall sind. Ein niedriger 
 P-Wert ist in der MI daher anzustreben. 
