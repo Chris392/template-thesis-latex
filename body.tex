@@ -31,7 +31,7 @@ Patienten ersetzt werden, indem andere Patienten mit gleichen Eigenschaften gesu
 Eigenschaften (z.B. gleiches Alter, gleicher BMI) steigt auch die Wahrscheinlichkeit, dass der Blutdruck-Wert ähnlich ist. 
 
 Allerdings kann diese Vorgehensweise aufwändig werden. Vor allem, wenn es sehr viele Variablen gibt. Es wird z.B. 
-schwierig werden, einen Patienten mit genau dem selben BMI, Alter, Blutdruck etc. zu finden. Daher wird in 
+schwierig werden, einen Patienten mit genau demselben BMI, Alter, Blutdruck etc. zu finden. Daher wird in 
 der MI versucht, anhand der vorhandenen Daten und einer Verteilungsfunktion eine Vermutung über den fehlenden Wert zu 
 bekommen. Man könnte z.B. davon ausgehen, dass die Blutdruckwerte der Bevölkerung Normalverteilt sind. Aufgrund dieser Vermutung 
 kann der Mittelwert aller Blutdruckwerte gebildet und für die fehlenden Daten eingesetzt werden. Für Komplexere Sachverhalte ist 
@@ -57,15 +57,15 @@ entsteht ein neuer Datensatz. Auf diesen neuen Datensatz wird der Vorgang nun me
 Ausgangspunkt der MI ist das Analysis Modell. Das Analysis Modell ist ein Datensatz, in welchem Daten verschiedener Variablen 
 fehlen können. In der ersten Phase der MI wird aus dem Analysis Modell ein Imputation Modell erstellt. Dazu werden dem 
 Analysis Model noch zusätzliche Variablen, sogenannte auxiliary variables (Hilfsvariablen) hinzugefügt. Die fehlenden 
-Daten werden daraufhin z.B. mit Hilfe der Chained-Equations mehrfach imputiert. Durch die mehrfache Imputation enstehen 
-mehrere Vervollständigte Datensätze. In der zweiten Phase werden die Vervollständigten Datensätzte analysiert und gemittelt, 
+Daten werden daraufhin z.B. mit Hilfe der Chained-Equations mehrfach imputiert. Durch die mehrfache Imputation entstehen 
+mehrere Vervollständigte Datensätze. In der zweiten Phase werden die Vervollständigten Datensätze analysiert und gemittelt, 
 wodurch der finale Datensatz ermittelt wird. Durch die Berechnung des Standard Errors kann die Unsicherheit der Daten 
 ermittelt werden. \autocite[163]{Lee2014} Im Folgenden wird auf die beiden Phasen der MI näher eingegangen.
 
 \subsection{Phase 1: Mehrfache Imputation}
 
 Die Grundsätzliche Idee der MI ist es, ein Regressionsmodell zu erstellen, dass mögliche Werte für die zu ersetzenden Werte 
-beinhaltet. Aus diesem Regressionmodell werden in Folge anhand einer Simulation randomisiert Werte gezogen. Angenommen, es 
+beinhaltet. Aus diesem Regressionsmodell werden in Folge anhand einer Simulation randomisiert Werte gezogen. Angenommen, es 
 würde sich um eine Normalverteilung handeln, dann würden die fehlenden Daten vereinfacht über folgende Formel aus \textcite[8]{Enders2017} gezogen werden:
 \begin{equation}
  Y_{(mis)}\sim N(\widehat{Y}, \sigma_\varepsilon^2)
@@ -83,20 +83,20 @@ Imputation der anderen. Dadurch wird die Unsicherheit der Imputation addressiert
 
 \subsection{Phase 2: Analyse der Daten}
 
-In der 2. Phase wird jeder der Imputierten Datensätze getrennt Betrachtet. Wenn z.B. 20 Imputationen durchgeführt wurden, 
-gibt es 20 Datensätzte, die Schätzwerte für die fehlenden Werte beinhalten. Für jeden dieser Datensätze wird ein gemeinsamer 
+In der 2. Phase wird jeder der Imputierten Datensätze getrennt betrachtet. Wenn z.B. 20 Imputationen durchgeführt wurden, 
+gibt es 20 Datensätze, die Schätzwerte für die fehlenden Werte beinhalten. Für jeden dieser Datensätze wird ein gemeinsamer 
 Schätzwert (z.B. über das Arithmetische Mittel) und der Standard Error berechnet. Zuletzt werden die 20 Datensätze noch 
-kombiniert, indem das Arithmetische Mittel der Schätzwerte sowie des Standart Errors gebildet wird. \autocite[10]{Enders2017}
+kombiniert, indem das Arithmetische Mittel der Schätzwerte sowie des Standard Errors gebildet wird. \autocite[10]{Enders2017}
 
 \subsection{Praktische Anwendung der MI}
 
-Statistische Programme wie SAS und Stata unterstützen bereits MI unter der Verwendung des Contitional Regression Modells 
+Statistische Programme wie SAS und Stata unterstützen bereits MI unter der Verwendung des Conditional Regression Modells 
 sowie der Joint Normal Distribution. \autocite[164]{Lee2014}. Da dieses Paper einen Allgemeinen Überblick über die MI 
-geben soll, wird auf die genaue Implementation nicht mehr eingegagnen. 
+geben soll, wird auf die genaue Implementierung nicht mehr eingegangen. 
 
-Eine Implemetation der MI kann in \textcite[]{Royston2005} gefunden werden. Dort wird die Implementierung der MI in der MICE Methode 
-näher erläutert. Die MICE-Methode basiert auf Chained-Equations. Die Implementation wird anhand von Ado-Datein beschrieben.
-Ado-Dateien sind Dateien, welche vom Statistik Programm Stata vewendet werden.
+Eine Implementierung der MI kann in \textcite[]{Royston2005} gefunden werden. Dort wird die Implementierung der MI in der MICE Methode 
+näher erläutert. Die MICE-Methode basiert auf Chained-Equations. Die Implementierung wird anhand von Ado-Datein beschrieben.
+Ado-Dateien sind Dateien, welche vom Statistik Programm Stata verwendet werden.
 
 \subsection{Vorgehensweise MI}
 
@@ -152,12 +152,12 @@ Gültige Methode für die Behandlung von NMAR-Daten. \autocite[1088]{Donders2006
 
 \subsection{Auswirkungen auf das Ergebnis der MI}
 
-MAR- und NMAR Daten sind schwer zu unterscheiden. NMAR können jedoch zu einem voreingenommenen Resultat führen.  Um das 
+MAR- und NMAR Daten sind schwer zu unterscheiden. NMAR können jedoch zu einem voreingenommenen Resultat führen. Um das 
 Risiko eines voreingenommenen Ergebnisses durch NMAR Daten zu verringern, kann eine Sensitivitätsanalyse angewendet 
 werden. \autocite[157]{Sterne2009} 
 
-Wenn es sich um MCAR Daten handelt, können anstatt der MI einfachere Methoden wie die Complete Case Anlaysis in Betracht 
-gezogen wereden. \autocite*[1088]{Donders2006} 
+Wenn es sich um MCAR Daten handelt, können anstatt der MI einfachere Methoden wie die Complete Case Analysis in Betracht 
+gezogen werden. \autocite*[1088]{Donders2006} 
 
 \section{Alternativen zur MI}
 \label{section:alternatives}
@@ -171,12 +171,12 @@ die Simulation wurden Daten aus einer Studie zu Lungenembolie mit 398 Subjekten 
 einen Unterschiedlichen Anteil an fehlende Daten bei einigen Variablen. Bei den fehlenden Daten handelte es 
 sich nicht um MCAR Daten.  Das Ergebnis der CCA schnitt dabei in allen Messgrößen im Vergleich zur single- 
 und multiplen Imputation schlechter ab. Als Qualitätskriterien wurden u.a. der Standard Error sowie die 
-Regressions Koeffizienten verwendet. Mögliche Qualitätskriterien werden in Kapitel XY nochmals näher erläutert.
+Regressionskoeffizienten verwendet. Mögliche Qualitätskriterien werden in Kapitel XY nochmals näher erläutert.
 
 Wenn es sich im Datensatz wie in der oben genannten Simulation nicht um MCAR-Daten handelt, dann ist das Ergebnis der 
 CCA vermutlich voreingenommen. Grund dafür ist, dass die CCA systematische Unterschiede nicht 
 berücksichtigt. \autocite[157]{Sterne2009} Im Fall von MAR-Daten eignet sich daher die Single- oder Multiple 
-Imputation Imputation besser. \autocite[1088]{Donders2006}
+Imputation besser. \autocite[1088]{Donders2006}
 
 
 \subsection{Single Imputation}
@@ -215,7 +215,7 @@ sich bei den untersuchten Variablen um Zeitrelevante Prozesse handelt.
 Die Simulation aus \textcite[]{Young-Saver2018} zum Thema akutem Schlaganfall, welche im Kapitel „Single Imputation“ 
 bereits erwähnt wurde, zeigt auch die Bedeutung von Post-Baseline Untersuchungen. Post-Baseline Untersuchungen sind
  Untersuchungen, die nach einem Bestimmtem Ereignis erhoben wurden. Im Falle der Studie wurde der NIH Stroke Scale 
- nach 24 Stunden und der mRS nach 7-10 Tagen erhoben. (der NIH Stroke Scale und der mRS sind beides Bewertungskalen
+ nach 24 Stunden und der mRS nach 7-10 Tagen erhoben. (der NIH Stroke Scale und der mRS sind beides Bewertungsskalen
   für die Symptome des Patienten). Die MI wurde einmal mit und einmal ohne Daten aus den Post-Baseline Untersuchungen 
   durchgeführt. Im Ergebnis der Simulation schnitt die Multiple Imputation mit Post-Baseline besser ab als ohne (siehe Abbildung \ref{figure:study})
 
@@ -242,11 +242,11 @@ Hilfsvariablen können z.B. auch aus anderen Studien/Datensätzen herangezogen w
 
 Eine Simulation in \textcite[]{Madley-Dowd2019} zeigt die Bedeutung der Hilfsvariablen. 
 Die Simulation wurde anhand von Daten aus ALSPAC (Avon Longitudinal Study of Parents and Children) 
-durchgeführt. In der ALSPAC Studie wurde die Auswirkung von Rauchen während der Schwangerschaft auf den Intelligenzquotionten des Kindes untersucht. Als Variablen wurde
+durchgeführt. In der ALSPAC Studie wurde die Auswirkung von Rauchen während der Schwangerschaft auf den Intelligenzquotienten des Kindes untersucht. Als Variablen wurde
 der IQ im Alter von 15 Jahren und ein Binärwert für das Rauchen während der Schwangerschaft verwendet. Als Hilfsvariablen wurde der IQ im Alter von 8 Jahren, die Verständlichkeit 
 und der Redefluss im Alter von 9 Jahren, ein Binärwert für das Vorhandensein von Lernschwierigkeiten sowie die Mathematik- und Lesefähigkeiten des Kindes im 6. Schuljahr verwendet. 
-Unter der Miteinbeziehung der Hilfsvariablen bei der MI verrigerte sich der Standard Error im Vergleich zur MI ohne Hilfsvariablen von 0.504 auf 0.461. Der FMI (Fraction of Missing Information)
-verringerte sich von 0.724 auf 0.664. \autocite[71]{Madley-Dowd2019} Der FMI ist ein Paramter, der den Verlust an Informationen darstellt. Der FMI kann zwischen 0 und 1 liegen, 
+Unter der Miteinbeziehung der Hilfsvariablen bei der MI verringerte sich der Standard Error im Vergleich zur MI ohne Hilfsvariablen von 0.504 auf 0.461. Der FMI (Fraction of Missing Information)
+verringerte sich von 0.724 auf 0.664. \autocite[71]{Madley-Dowd2019} Der FMI ist ein Parameter, der den Verlust an Informationen darstellt. Der FMI kann zwischen 0 und 1 liegen, 
 ein niedriger FMI ist anzustreben.
 \autocite[65]{Madley-Dowd2019} Die Begriffe Standarderror sowie Bias werden im nächsten Kapitel (Kapitel \ref{section:qualtity}) näher beschrieben. 
 
@@ -254,7 +254,7 @@ ein niedriger FMI ist anzustreben.
 Man sieht anhand der Reduktion von FMI und Standarderror, dass sich Hilfsvariablen positiv auf die MI auswirken können. Ausschlaggebend für den Effekt von Hilfsvariablen
 ist u.a. ob die Hilfsvariable genügend Information über die fehlenden Werte bereitstellt. \autocite[1302]{Hughes2019} Ein Indikator für den Effekt einer Hilfsvariable auf 
 die MI ist die Reduktion des Standarderrors. In der Studie von \textcite[]{Madley-Dowd2019} reduzierte sich der Standarderror bei der Hinzugabe der Hilfsvariable 
-"IQ im Alter von 8 Jahren" um 7.65\%. Wurde die Hilfsvariable "Learning Disablities" hinzugefügt, erhöhte sich der Standarderror um 0,8\%. \autocite[71]{Madley-Dowd2019} 
+"IQ im Alter von 8 Jahren" um 7.65\%. Wurde die Hilfsvariable "Learning Disabilities" hinzugefügt, erhöhte sich der Standarderror um 0,8\%. \autocite[71]{Madley-Dowd2019} 
 Dies zeigt, dass nicht alle Hilfsvariablen zwingend den Informationsgehalt und damit die Genauigkeit des Ergebnisses verbessern. 
 Eine sorgfältige Überprüfung/Auswahl von Hilfsvariablen ist daher von Vorteil. 
 
@@ -274,24 +274,19 @@ für die Entstehung von Herz-Kreislauferkrankungen miteinbeziehen, ist das Ergeb
 Eine ordnungsgemäße Durchführung der MI, sowie eine genaue Überprüfung des Datensatzes, ist noch keine Garantie dafür, 
 dass das Ergebnis nicht biased ist. Vor allem wenn nicht klar ist, ob es sich bei den verwendeten Daten um MAR oder MNAR 
 Daten handelt. Es gibt einige Möglichkeiten, um die Qualität der MI zu Überprüfen und damit auch eine Abschätzung über einen 
-Möglichen bias zu geben. Im Folgenden werden diese 
+Möglichen Bias zu geben. Im Folgenden werden diese 
 
-\subsection{Standard Error und P-Value}
+\subsection{Standard Error}
 
 Standardmäßig wird in der MI der Standard Error berechnet. Der Standarderror ist ein Maß für die Unsicherheit der 
 geschätzten Werte. \autocite[1098]{Donders2006} Der Standarderror ist somit auch ein Indikator für den Informationsverlust durch fehlende Daten. \autocite[1298]{Hughes2019}
 Angenommen es gibt in einer Studie fehlende Blutdruckwerte. Die Blutdruckwerte werden nun 3x mithilfe verschiedener Stichproben und Parametern anhand einer Regression imputiert.
 Es entstehen somit 3 komplette Datensätze mit jeweils unterschiedlichen imputierten Blutdruckwerten. Ist der Mittelwert der imputierten Blutdruckwerte zwischen den 3 kompletten
-Datensätzten sehr unterschiedlich, dann wird der Standarderror hoch sein. Daraus kann man schließen, dass es eine hohe Unsicherheit in der Genauigkeit der Blutdruckdaten gibt und
+Datensätzen sehr unterschiedlich, dann wird der Standarderror hoch sein. Daraus kann man schließen, dass es eine hohe Unsicherheit in der Genauigkeit der Blutdruckdaten gibt und
 somit womöglich ein Bias vorhanden ist.   
 
-%TODO p-value näher anhand von S.Richter beschreiben (Threshold) und Beispiel geben
-Des Weiteren kann der P-Wert berechnet werden. Der P-Wert ist ein Wert zwischen 0 und 1. Je höher der P-Wert ist, 
-desto höher ist die Wahrscheinlichkeit, dass die Ergebnisse Zufall sind. Ein niedriger 
-P-Wert ist in der MI daher anzustreben. 
 
-
-\subsection{Simulierte fehlende Daten}
+\subsection{Simulierte fehlende Daten und P-Value}
 
 Eine einfache Methode zur Qualitätsüberprüfung ist es, einen vollständigen Datensatz zu nehmen und die fehlenden Daten zu 
 simulieren. Nach dieser Vorgehensweise wurde auch die Simulation aus (D. Young-Saver, 2018) durchgeführt. Hierbei wurde 
@@ -300,6 +295,13 @@ imputierten Daten mit den Daten des Vollständigen Datensatzes vergleichen kann.
 Bestimmung der exakten Übereinstimmungsrate. Hierbei wird der Anteil von exakten Übereinstimmungen zwischen den imputierten 
 und originalen Werten bestimmt. Des Weiteren kann Spearmans Korrelationskoeffizient, oder die Mittlere (Absolute) Abweichung 
 bestimmt werden. \autocite[3664]{Young-Saver2018} 
+
+Ein weiterer Wert, mit dem der Unterschied zwischen vollständigem und imputiertem Datensatz verglichen werden kann, ist der P-Value.
+Der P-Value gibt an, wie groß der Unterschied zwischen zwei Datensätzen ist. Je nachdem, wie groß der gewählte Threshold ist,
+kann daraufhin eine Aussage darüber getroffen werden, ob die beiden Datensätze signifikant oder nicht signifikant unterschiedlich
+sind. 
+
+%TODO give Sample according to Paper
 
 %Feedback Christoph: Beispiel für eine Sensitivitätsanalyse geben
 \subsection{Sensitivitätsanalyse}
@@ -333,9 +335,8 @@ Handelt es sich um MCAR Daten, kann der Einsatz einer CCA überlegt werden. Gibt
 zu den fehlenden Daten, kann auch die Verwendung der Single Imputation in der LOCF-Variante gute Ergebnisse erzielen. 
 Das Hinzufügen von Post-Baseline Untersuchungen oder Hilfsvariablen kann das Resultat der MI verbessern. 
 
-Nach der Durchführung der MI ist es zu empfehlen, eine Sensitiviätsanalyse durchzuführen. Vor allem, wenn es sich nicht 
-sicher um MAR Daten handelt. Der Standard Error sowie der P-Value sollten nicht zu hoch sein, da hohe Werte auf ein 
-biased Ergebnis hinweisen könnten.
+Nach der Durchführung der MI ist es zu empfehlen, eine Sensitivitätsanalyse durchzuführen. Vor allem, wenn es sich nicht 
+sicher um MAR Daten handelt. Der Standard Error sowie der P-Value sollten nicht zu hoch sein, da hohe Werte auf einen Bias hinweisen können.
 
 MI ist eines der wichtigsten Werkzeuge für die Behandlung von fehlenden Daten in vielen verschiedenen Bereichen. 
 Wer sich z.B. mit Statistik oder AI beschäftigt, sollte einen Überblick über MI haben. MI ist ein komplexes Thema und 
