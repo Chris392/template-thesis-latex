@@ -2,16 +2,16 @@
 \section{Einleitung}
 \label{section:Introduction}
 
-In der Medizinischen Forschung ist es wichtig, dass Studienergebnisse mit 
-fehlenden Daten sorgfältig analysiert und bearbeitet werden. Das soll verhindern, dass es zu einer Verzerrung des 
-Ergebnisses kommt. Viele Medizinische Zeitschriften verlangen bereits einen korrekten Umgang mit Fehlenden Daten sowie 
+In der medizinischen Forschung ist es wichtig, dass Studienergebnisse mit 
+fehlenden Daten sorgfältig analysiert und bearbeitet werden. Dies soll verhindern, dass es zu einer Verzerrung des 
+Ergebnisses kommt. Viele medizinische Zeitschriften verlangen bereits einen korrekten Umgang mit fehlenden Daten sowie 
 eine Rechtfertigung für den gewählten statistischen Ansatz. \autocite[163]{Lee2014} 
 Eine wichtige Methode zur Behandlung von fehlenden Daten ist die Multiple Imputation (MI).
 
-Ziel dieser Arbeit ist es, einen Überblick über die MI im Medizinischen Bereich zu geben. Neben einer 
+Ziel dieser Arbeit ist es, einen Überblick über die MI im medizinischen Bereich zu geben. Neben einer 
 Erklärung der MI, wird auf wichtige Fragestellungen bei der Durchführung der MI eingegangen.
 
-Ein wichtiger Teil bei der Durchführung der MI ist die Planung der MI und die Überprüfung des Datensatzes. 
+Ein wichtiger Teil bei der Durchführung der MI ist die Planung und die Überprüfung des Datensatzes. 
 Dabei wird im Forschungsblatt der Anteil von fehlenden Daten sowie die Art der fehlenden Daten erläutert. 
 Des Weiteren muss die Methode der Imputation gewählt werden. Es werden einige Alternativen zur MI aufgezeigt und es 
 wird auf den Vorteil von Hilfsvariablen bzw. Post-Baseline Untersuchungen eingegangen. Nach der Durchführung
@@ -25,17 +25,17 @@ Qualitätsfeststellung beschrieben.
 \subsection{Anwendungsbeispiel der MI}
 
 Angenommen es würde eine Studie über den Zusammenhang zwischen Blutdruck und dem Risiko eines Herzinfarkts geben. 
-Dabei fehlen die Blutdruck Daten bei einigen Herzinfarkt-Patienten. Man kann nun aufgrund der anderen Daten die 
-gesammelt wurden Rückschlüsse auf die fehlenden Daten ziehen. So können z.B. die fehlenden Blutdruck-Daten einiger 
+Dabei fehlen die Blutdruck Daten bei einigen Herzinfarkt-Patienten. Man kann nun aufgrund der anderen Daten, die 
+gesammelt wurden, Rückschlüsse auf die fehlenden Daten ziehen. So können z.B. die fehlenden Blutdruck Daten einiger 
 Patienten ersetzt werden, indem andere Patienten mit gleichen Eigenschaften gesucht werden. Bei Patienten mit gleichen 
 Eigenschaften (z.B. gleiches Alter, gleicher BMI) steigt auch die Wahrscheinlichkeit, dass der Blutdruck-Wert ähnlich ist. 
 
-Allerdings kann diese Vorgehensweise aufwändig werden. Vor allem, wenn es sehr viele Variablen gibt. Es wird z.B. 
+Allerdings kann diese Vorgehensweise aufwändig sein. Vor allem, wenn es sehr viele Variablen gibt. Es wird z.B. 
 schwierig werden, einen Patienten mit genau demselben BMI, Alter, Blutdruck etc. zu finden. Daher wird in 
 der MI versucht, anhand der vorhandenen Daten und einer Verteilungsfunktion eine Vermutung über den fehlenden Wert zu 
-bekommen. Man könnte z.B. davon ausgehen, dass die Blutdruckwerte der Bevölkerung Normalverteilt sind. Aufgrund dieser Vermutung 
+bekommen. Man könnte z.B. davon ausgehen, dass die Blutdruckwerte der Bevölkerung normalverteilt sind. Aufgrund dieser Vermutung 
 kann der Mittelwert aller Blutdruckwerte gebildet und für die fehlenden Daten eingesetzt werden. Es würde sich dabei um eine ``Single Regression`` handeln. \autocite[3]{Shrive2006}
-Für Komplexere Sachverhalte ist 
+Für komplexere Sachverhalte ist 
 dieses Vorgehen allerdings nicht ausreichend. \autocite[1089]{Donders2006}
 
 Um den gesamten Sachverhalt besser darstellen zu können, werden z.B. mehrere voneinander abhängige Regressionsmodelle 
@@ -57,10 +57,10 @@ Das mehrfache Wiederholen des Vorgangs erhöht die Genauigkeit der imputierten W
 \subsection{Funktionsweise der MI}
 
 Ausgangspunkt der MI ist das Analysis Modell. Das Analysis Modell ist ein Datensatz, in welchem Daten verschiedener Variablen 
-fehlen können. In der ersten Phase der MI wird aus dem Analysis Modell ein Imputation Modell erstellt. Dazu werden dem 
+fehlen können. In der ersten Phase der MI wird aus dem Analysis Modell ein Imputations Modell erstellt. Dazu werden dem 
 Analysis Model noch zusätzliche Variablen, sogenannte auxiliary variables (Hilfsvariablen) hinzugefügt. Die fehlenden 
 Daten werden daraufhin z.B. mit Hilfe der Chained Equations mehrfach imputiert. Durch die mehrfache Imputation entstehen 
-mehrere Vervollständigte Datensätze. In der zweiten Phase werden die Vervollständigten Datensätze analysiert und gemittelt, 
+mehrere vervollständigte Datensätze. In der zweiten Phase werden die vervollständigten Datensätze analysiert und gemittelt, 
 wodurch der finale Datensatz ermittelt wird. Durch die Berechnung des Standard Errors kann die Unsicherheit der Daten 
 ermittelt werden. \autocite[163]{Lee2014} Im Folgenden wird auf die beiden Phasen der MI, sowie auf die Begriffe Standarderror und Bias, näher eingegangen.
 
@@ -79,14 +79,14 @@ stellt die Verteilung einer Variable, z.B. des Blutdrucks im Verhältnis zu den 
 Insgesamt ist die Imputation aus einer Gleichung die Summe eines Abweichungswertes 
 (Varianz) und des vorhergesagten Wertes. \autocite[8]{Enders2017}. Der Schätzwert für einen fehlenden Wert wird also berechnet, indem man einen 
 Wert entsprechend der abhängigen Variablen aus dem Bereich einer Gleichung zieht. Der Bereich wird dabei durch die Varianz bestimmt, die die Unsicherheit der Daten angibt.
-Das Zufällige ziehen von Schätzungen zu den fehlenden Werten wird mehrfach wiederholt, wodurch mehrere Vollständige 
-Datensätze entstehen. Auf denen wird daraufhin die Analyse durchgeführt. \autocite[163 ff.]{Lee2014} Durch das 
-wiederholen der Imputationen mit unterschiedlichen, plausiblen Regressions-Parametern, gleichen die Datensätze keiner 
-Imputation der anderen. \autocite[8]{Enders2017} Ein Grundprinzip der MI ist es also, mehrere Annahmen über die vorhandenen Daten zu machen, 
+Das Zufällige ziehen von Schätzungen zu den fehlenden Werten wird mehrfach wiederholt, wodurch mehrere vollständige 
+Datensätze entstehen. Auf diese Datensätze wird daraufhin die Analyse durchgeführt. \autocite[163 ff.]{Lee2014} Durch das 
+Wiederholen der Imputationen mit unterschiedlichen, plausiblen Regressions-Parametern, gleichen die Datensätze keiner 
+Imputation der anderen. \autocite[8]{Enders2017} 
 
 \subsection{Phase 2: Analyse der Daten}
 
-In der 2. Phase wird jeder der Imputierten Datensätze getrennt betrachtet. Wenn z.B. 20 Imputationen durchgeführt wurden, 
+In der 2. Phase wird jeder der imputierten Datensätze getrennt betrachtet. Wenn z.B. 20 Imputationen durchgeführt wurden, 
 gibt es 20 Datensätze, die Schätzwerte für die fehlenden Werte beinhalten. Für jeden dieser Datensätze wird ein gemeinsamer 
 Schätzwert (z.B. über das Arithmetische Mittel) und der Standard Error berechnet. Zuletzt werden die 20 Datensätze noch 
 kombiniert, indem das Arithmetische Mittel der Schätzwerte sowie des Standard Errors gebildet wird. \autocite[10]{Enders2017}
@@ -110,11 +110,12 @@ für die Entstehung von Herz-Kreislauferkrankungen miteinbeziehen, ist das Ergeb
 \subsection{Praktische Anwendung der MI}
 
 Statistische Programme wie SAS und Stata unterstützen bereits MI unter der Verwendung des Conditional Regression Modells 
-sowie der Joint Normal Distribution. \autocite[164]{Lee2014}. Da dieses Paper einen Allgemeinen Überblick über die MI 
+sowie der Joint Normal Distribution. \autocite[164]{Lee2014}. Da dieses Paper einen allgemeinen Überblick über die MI 
 geben soll, wird auf die genaue Implementierung nicht mehr eingegangen. 
 
-Eine Implementierung der MI kann in \textcite[]{Royston2005} gefunden werden. Dort wird die Implementierung der MI in der MICE Methode 
-näher erläutert. Die MICE-Methode basiert auf Chained Equations. Die Implementierung wird anhand von Ado-Dateien beschrieben.
+Eine Implementierung der MI kann in \textcite[]{Royston2005} gefunden werden. Dort wird die Implementierung der MI in der Multiple 
+Imputation by Chained Equations (MICE)-Methode 
+näher erläutert. Die MICE-Methode basiert namensgebend auf Chained Equations. Die Implementierung wird anhand von Ado-Dateien beschrieben.
 Ado-Dateien sind Dateien, welche vom Statistik Programm Stata verwendet werden.
 
 \subsection{Vorgehensweise MI}
@@ -134,35 +135,35 @@ dass es ab 10\% an fehlenden Daten wahrscheinlich zu einem Bias kommen kann. Ab 
 das Ergebnis der MI nur mehr als Hypothese gesehen werden. Die Beweislage, die diese Grenzen 
 stützt, ist allerdings gering. \autocite[63 f.]{Madley-Dowd2019}
 
-In der Studie “The proportion of missing data should not be used to guide decisions on multiple imputation” wird 
+In der Studie \textcite[]{Madley-Dowd2019} wird 
 argumentiert, dass der Anteil an fehlenden Daten nicht unbedingt ausschlaggebend für den Erfolg oder Misserfolg der 
 MI steht. Viel mehr spielen die Art der fehlenden Daten und die Verwendung von Hilfsvariablen eine wichtige Rolle. 
 
 \section{Art der fehlenden Daten}
 \label{section:descriptor_of_missingness}
 
-Nach Definition von (Little \& Rubin, 2002; Rubin, 1976) gibt es 3 verschiedene Arten von fehlenden Daten:
+Es gibt 3 verschiedene Arten von fehlenden Daten:
 
 \subsection{MCAR: Missing Completely at Random}
 
-Die Fehlenden Daten haben keine Verbindung zu den zu analysierenden Daten. Gründe für MCAR Daten 
-können zum Beispiel ein Strom- oder Internetausfall sein. \autocite[8]{Enders2017} Angenommen es kommt zu einem 24-Stündigem Stromausfall.
-Das Resultat daraus ist, dass 24-Stunden lang keine Ergebnisse von Untersuchungen gespeichert werden können. Bei dem Stromausfall
+Die fehlenden Daten haben keine Verbindung zu den zu analysierenden Daten. Gründe für MCAR Daten 
+können zum Beispiel ein Strom- oder Internetausfall sein. \autocite[8]{Enders2017} Angenommen es kommt zu einem 24-stündigen Stromausfall.
+Das Resultat daraus ist, dass 24 Stunden lang keine Ergebnisse von Untersuchungen gespeichert werden können. Bei dem Stromausfall
 handelt es sich um ein komplett zufälliges Event, dass vermutlich alle Typen von Patienten (alt, jung, groß, klein, ...) gleichermaßen betrifft.
 Man spricht daher bei den fehlenden Daten von MCAR Daten. 
 
 \subsection{MAR: Missing at Random}
 
-Systematische Unterschiede zwischen den fehlenden Daten und den Untersuchten Daten können erklärt 
+Systematische Unterschiede zwischen den fehlenden Daten und den untersuchten Daten können erklärt 
 werden. So können zum Beispiel Blutdruckwerte v.a. bei jüngeren Personen fehlen, da bei diesen 
 der Blutdruck weniger oft kontrolliert wird. \autocite[157]{Sterne2009} An den vorhandenen Daten 
-kann man nun erkennen, dass es bei Menschen mit Jüngerem Alter öfter zu fehlenden Blutdruckdaten 
+kann man nun erkennen, dass es bei Menschen mit jüngerem Alter öfter zu fehlenden Blutdruckdaten 
 kommt. Man könnte daher repräsentativ für die fehlenden Blutdruckdaten, die Blutdruckdaten anderer 
-Junger Teilnehmer verwenden, bei welchen die Messung des Blutdrucks nicht vergessen wurde. 
+junger Teilnehmer verwenden, bei welchen die Messung des Blutdrucks nicht vergessen wurde. 
 
 \subsection{NMAR: Not Missing at Random}
 
-Es gibt systematische Unterschiede, welche nicht anhand der Untersuchten Daten erkannt werden 
+Es gibt systematische Unterschiede, welche nicht anhand der untersuchten Daten erkannt werden 
 können. NMAR Daten können zum Beispiel entstehen, wenn Patienten mit hohem Blutdruck häufiger 
 aufgrund von Kopfschmerzen fehlen. \autocite[157]{Sterne2009} Anhand der vorhandenen Daten kann
  man nun nicht erkennen, dass es eine Gruppe von Menschen mit Kopfschmerzen gibt, welche bei den 
@@ -170,7 +171,7 @@ aufgrund von Kopfschmerzen fehlen. \autocite[157]{Sterne2009} Anhand der vorhand
 
 NMAR-Daten können anhand von statistischen Tests nicht identifiziert werden. NMAR-Daten können 
 also nur als solche durch vorhandenes Wissen interpretiert werden. Daher gibt es keine allgemein 
-Gültige Methode für die Behandlung von NMAR-Daten. \autocite[1088]{Donders2006}
+gültige Methode für die Behandlung von NMAR-Daten. \autocite[1088]{Donders2006}
 
 \subsection{Auswirkungen auf das Ergebnis der MI}
 
@@ -190,12 +191,11 @@ Bei der CCA werden Teilnehmer mit fehlenden Daten aus der Studie exkludiert. \au
 
 In einer Simulation aus \textcite[]{VanderHeijden2006} erzielte die CCA schlechtere Ergebnisse als die MI. Für 
 die Simulation wurden Daten aus einer Studie zu Lungenembolie mit 398 Subjekten verwendet. Dabei gab es 
-einen Unterschiedlichen Anteil an fehlende Daten bei einigen Variablen. Bei den fehlenden Daten handelte es 
+einen unterschiedlichen Anteil an fehlende Daten bei einigen Variablen. Bei den fehlenden Daten handelte es 
 sich nicht um MCAR Daten.  Das Ergebnis der CCA schnitt dabei in allen Messgrößen im Vergleich zur single- 
-und multiplen Imputation schlechter ab. Als Qualitätskriterien wurden u.a. der Standard Error sowie die 
-Regressionskoeffizienten verwendet. Mögliche Qualitätskriterien werden in Kapitel XY nochmals näher erläutert.
+und multiplen Imputation schlechter ab.
 
-Wenn es sich im Datensatz wie in der oben genannten Simulation nicht um MCAR-Daten handelt, dann ist das Ergebnis der 
+Wenn es sich im Datensatz, wie in der oben genannten Simulation, nicht um MCAR-Daten handelt, dann ist das Ergebnis der 
 CCA vermutlich voreingenommen. Grund dafür ist, dass die CCA systematische Unterschiede nicht 
 berücksichtigt. \autocite[157]{Sterne2009} Im Fall von MAR-Daten eignet sich daher die Single- oder Multiple 
 Imputation besser. \autocite[1088]{Donders2006}
@@ -214,9 +214,9 @@ unrealistisch, weshalb diese Methode mit Bedacht eingesetzt werden soll.
 Eine Simulation aus \textcite[]{Young-Saver2018} zeigt, dass mit der LOCF Methode ähnlich gute oder sogar bessere 
 Ergebnisse erzielt werden können als mit der MI. In der Simulation wurden Daten aus einer Studie zu akutem Schlaganfall 
 verwendet. Begründet wird das gute Abschneiden der LOCF u.a. mit der zeitlichen Nähe der letzten Untersuchung zu dem zu 
-schätzen den Wert. Durch die zeitliche Nähe haben zeitrelevante Prozesse, wie Neuroplastizität oder Neuronale Regeneration 
+schätzenden Wert. Durch die zeitliche Nähe haben zeitrelevante Prozesse, wie Neuroplastizität oder Neuronale Regeneration 
 (neuronale Prozesse) keinen so großen Einfluss. Zudem ist die Wahrscheinlichkeit von Vorfällen geringer, welche Einfluss 
-auf die zu erhebenden Werte haben könnten. Dazu gehören z.B. Unfälle oder Herzinfarkte. \autocite[3667]{Young-Saver2018}. 
+auf die zu erhebenden Werte haben können. Dazu gehören z.B. Unfälle oder Herzinfarkte. \autocite[3667]{Young-Saver2018}. 
 Wie gut die LOCF Methode im Vergleich zur MI abschneidet kann jedoch nicht allgemein gesagt werden und hängt maßgeblich 
 von den verwendeten Daten ab. 
 
@@ -237,7 +237,7 @@ Zusätzliche Daten können den Informationsgehalt erhöhen und damit zur Reduzie
 \subsection{Post-Baseline Untersuchungen}
 
 Die Simulation aus \textcite[]{Young-Saver2018} zum Thema akutem Schlaganfall zeigt die Bedeutung von Post-Baseline Untersuchungen. Post-Baseline Untersuchungen sind
- Untersuchungen, die nach einem Bestimmtem Ereignis erhoben wurden. Z.B. nach einem vorgefallenem Schlaganfall. Im Falle der Studie wurde der NIH Stroke Scale 
+ Untersuchungen, die nach einem bestimmtem Ereignis erhoben wurden, z.B. nach einem vorgefallenem Schlaganfall. Im Falle der Studie wurde der NIH Stroke Scale 
  nach 24 Stunden und der mRS nach 7-10 Tagen erhoben. (der NIH Stroke Scale und der mRS sind beides Bewertungsskalen
   für die Symptome des Patienten). Die MI wurde einmal mit und einmal ohne Daten aus den Post-Baseline Untersuchungen 
   durchgeführt. Im Ergebnis der Simulation schnitt die Multiple Imputation mit Post-Baseline besser ab als ohne. (siehe Abbildung \ref{figure:study})
@@ -248,7 +248,7 @@ Die Simulation aus \textcite[]{Young-Saver2018} zum Thema akutem Schlaganfall ze
 	\caption{
 		Die MI mit Post-Baseline Variablen (orange umrahmt) schnitt bei jedem Prozentsatz an fehlenden Daten besser ab als 
 		die MI ohne Post Baseline Variablen (blau umrahmt). Die Simulation wurde mittels simulierter fehlender Daten durchgeführt. Berechnet wurde der P-Value.
-		Eine nähere Erläuterung dazu kann in Kapitel \ref{section:qualtity} gefunden werden. 
+		Eine nähere Erläuterung dazu kann in Kapitel \ref{section:qualtity} nachgelesen werden. 
 		Grafik aus \textcite[3667]{Young-Saver2018}, die Beschriftung sowie die blaue/orange Markierung wurde nachträglich 
 		hinzugefügt.
 	}
@@ -295,10 +295,10 @@ Neben dem Standarderror, gibt es noch weitere Qualitätskriterien für die MI. E
 
 Eine einfache Methode zur Qualitätsüberprüfung ist es, einen vollständigen Datensatz zu nehmen und die fehlenden Daten zu 
 simulieren. Nach dieser Vorgehensweise wurde auch die Simulation aus \textcite[]{Young-Saver2018} durchgeführt. Hierbei wurde 
-aus dem Vollständigen Datensatz auf Basis eines randomisierten Verfahrens Daten gelöscht. Daraus folgt, dass man nun die 
-imputierten Daten mit den Daten des Vollständigen Datensatzes vergleichen kann. Ein möglicher Vergleich wäre z.B. die 
+aus dem vollständigen Datensatz auf Basis eines randomisierten Verfahrens Daten gelöscht. Daraus folgt, dass man nun die 
+imputierten Daten mit den Daten des vollständigen Datensatzes vergleichen kann. Ein möglicher Vergleich wäre z.B. die 
 Bestimmung der exakten Übereinstimmungsrate. Hierbei wird der Anteil von exakten Übereinstimmungen zwischen den imputierten 
-und originalen Werten bestimmt. Des Weiteren kann Spearmans Korrelationskoeffizient, oder die Mittlere (Absolute) Abweichung 
+und originalen Werten bestimmt. Des Weiteren kann Spearmans Korrelationskoeffizient oder die Mittlere (Absolute) Abweichung 
 bestimmt werden. \autocite[3664]{Young-Saver2018} 
 
 Ein weiterer Wert, mit dem der Unterschied zwischen vollständigem und imputiertem Datensatz verglichen werden kann, ist der P-Value.
@@ -318,22 +318,22 @@ hohen Blutdrucks verlassen. Damit gäbe es einen systematischen Zusammenhang und
 Studien ist es schwer, eine sichere Vermutung über die Art der fehlenden Daten zu treffen. Mit Sensitivitätsanalysen können 
 mehrere Vermutungen über die Art der fehlenden Daten überprüft werden. \autocite[2815]{Cro2020}
 
-Im Allgemeinen gibt es 2 Varianten der Sensitivitätsanalyse: $\delta$-basiert und referenzbasiert. In der $\delta$-basierten Variante 
+Im Allgemeinen gibt es zwei Varianten der Sensitivitätsanalyse: $\delta$-basiert und referenzbasiert. In der $\delta$-basierten Variante 
 wird dem zu erwarteten Wert noch ein Offset Variable $\delta$(Delta) hinzugefügt, welche den Einfluss von 
-fehlenden/nicht-beobachteten Teilnehmern bewertet.  In der Referenzbasierten Sensitivitätsanalyse werden Werte aus 
-anderen Gruppen des Versuchs imputiert, welche Referenz zu den Beobachteten Werten beinhaltet. \autocite[2815]{Cro2020} 
+fehlenden oder nicht-beobachteten Teilnehmern bewertet.  In der Referenzbasierten Sensitivitätsanalyse werden Werte aus 
+anderen Gruppen des Versuchs imputiert, welche Referenz zu den beobachteten Werten beinhaltet. \autocite[2815]{Cro2020} 
 Eine praktische Beschreibung der Durchführung der Sensitivitätsanalyse in Verbindung mit der MI kann in 
 \textcite[]{Cro2020} gefunden werden.
 
 \section{Fazit}
 
 Eine sorgfältige Planung und Durchführung der Imputation ist wichtig, damit es nicht zu verzerrten Ergebnissen kommt. 
-Im ersten Schritt sollte der verwendete Datensatz überprüft werden. Bei den Verwendeten Daten sollte der Anteil an fehlenden 
-Daten nicht zu hoch sein. In der Forschung gibt es jedoch Unterschiedliche Vorgaben, welche Menge an fehlenden Daten in 
+Im ersten Schritt sollte der verwendete Datensatz überprüft werden. Bei den verwendeten Daten sollte der Anteil an fehlenden 
+Daten nicht zu hoch sein. In der Forschung gibt es jedoch unterschiedliche Vorgaben, welche Menge an fehlenden Daten in 
 Ordnung ist. Mehr Forschung wäre hier von Vorteil. Bei der Art der fehlenden Daten sollte es sich möglichst um MAR Daten 
 handeln. 
 
-Im Zweiten Schritt sollte die zu verwendende Methode für die Behandlung fehlender Daten, sowie die Verwendung von zusätzlichen Variablen geplant 
+Im zweiten Schritt sollte die zu verwendende Methode für die Behandlung fehlender Daten, sowie die Verwendung von zusätzlichen Variablen geplant 
 werden. 
 Handelt es sich um MCAR Daten, kann der Einsatz einer CCA überlegt werden. Gibt es relevante, zeitnahe Untersuchungen 
 zu den fehlenden Daten, kann auch die Verwendung der Single Imputation in der LOCF-Variante gute Ergebnisse erzielen. 
