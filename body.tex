@@ -40,9 +40,9 @@ dieses Vorgehen allerdings nicht ausreichend. \autocite[1089]{Donders2006}
 Um den gesamten Sachverhalt besser darstellen zu können, werden z.B. mehrere voneinander abhängige Regressionsmodelle 
 (Chained Equations) oder eine Mehrdimensionale Normalverteilung (Multivariate Normal Imputation) benötigt. \autocite[489]{Spratt2010} Damit 
 werden mehrere Eigenschaften berücksichtigt. Für die Studie könnten die Daten z.B. mithilfe von Chained Equations imputiert werden. Im Folgenden wird
-die Chained-Equation Methode anhand eines einfachen Beispiels näher erläutert:
+die Chained Equation Methode anhand eines einfachen Beispiels näher erläutert:
 
-In der Chained-Equation Methode werden mehrere Imputationen auf einzelnen Variablen durchgeführt. Angenommen es gibt die Variablen BMI, Alter und Blutdruck. 
+In der Chained Equation Methode werden mehrere Imputationen auf einzelnen Variablen durchgeführt. Angenommen es gibt die Variablen BMI, Alter und Blutdruck. 
 In allen Variablen gibt es fehlende Daten. Zu Beginn kann für die fehlenden Daten z.B. einfach der Mittelwert eingesetzt werden. Also für alle fehlenden 
 BMI-Daten wird der Mittelwert der BMI-Werte eingesetzt. Dasselbe passiert für Alter und Blutdruck. Danach wird auf jede Variable jeweils eine Imputation durchgeführt. 
 Zuerst können z.B. die fehlenden BMI-Daten imputiert werden. Dazu werden zuerst die bereits vorhandenen imputierten Werte (im Falle des ersten Durchlaufs die Mittelwerte)
@@ -58,7 +58,7 @@ Das mehrfache Wiederholen des Vorgangs erhöht die Genauigkeit der imputierten W
 Ausgangspunkt der MI ist das Analysis Modell. Das Analysis Modell ist ein Datensatz, in welchem Daten verschiedener Variablen 
 fehlen können. In der ersten Phase der MI wird aus dem Analysis Modell ein Imputation Modell erstellt. Dazu werden dem 
 Analysis Model noch zusätzliche Variablen, sogenannte auxiliary variables (Hilfsvariablen) hinzugefügt. Die fehlenden 
-Daten werden daraufhin z.B. mit Hilfe der Chained-Equations mehrfach imputiert. Durch die mehrfache Imputation entstehen 
+Daten werden daraufhin z.B. mit Hilfe der Chained Equations mehrfach imputiert. Durch die mehrfache Imputation entstehen 
 mehrere Vervollständigte Datensätze. In der zweiten Phase werden die Vervollständigten Datensätze analysiert und gemittelt, 
 wodurch der finale Datensatz ermittelt wird. Durch die Berechnung des Standard Errors kann die Unsicherheit der Daten 
 ermittelt werden. \autocite[163]{Lee2014} Im Folgenden wird auf die beiden Phasen der MI, sowie auf die Begriffe Standarderror und Bias, näher eingegangen.
@@ -66,7 +66,7 @@ ermittelt werden. \autocite[163]{Lee2014} Im Folgenden wird auf die beiden Phase
 \subsection{Phase 1: Mehrfache Imputation}
 
 Die Grundsätzliche Idee der MI ist es, ein Regressionsmodell zu erstellen, dass mögliche Werte für die fehlenden Werte 
-beinhaltet. Das Regressionmodell beinhaltet also eine Reihe an Werten, die für die fehlenden Werte plausiebel sind.
+beinhaltet. Das Regressionsmodell beinhaltet also eine Reihe an Werten, die für die fehlenden Werte plausibel sind.
 Aus diesem Regressionsmodell werden in Folge anhand einer Simulation randomisiert Werte gezogen. Angenommen, es 
 würde sich um eine Normalverteilung handeln, dann würden die fehlenden Daten vereinfacht über folgende Formel aus \textcite[8]{Enders2017} gezogen werden:
 \begin{equation}
@@ -113,7 +113,7 @@ sowie der Joint Normal Distribution. \autocite[164]{Lee2014}. Da dieses Paper ei
 geben soll, wird auf die genaue Implementierung nicht mehr eingegangen. 
 
 Eine Implementierung der MI kann in \textcite[]{Royston2005} gefunden werden. Dort wird die Implementierung der MI in der MICE Methode 
-näher erläutert. Die MICE-Methode basiert auf Chained-Equations. Die Implementierung wird anhand von Ado-Datein beschrieben.
+näher erläutert. Die MICE-Methode basiert auf Chained Equations. Die Implementierung wird anhand von Ado-Dateien beschrieben.
 Ado-Dateien sind Dateien, welche vom Statistik Programm Stata verwendet werden.
 
 \subsection{Vorgehensweise MI}
@@ -284,7 +284,7 @@ Dies zeigt, dass nicht alle Hilfsvariablen zwingend den Informationsgehalt und d
 Eine sorgfältige Überprüfung/Auswahl von Hilfsvariablen ist daher von Vorteil. 
 
 Neben dem Standarderror, gibt es noch weitere Qualitätskriterien für die MI. Einige davon werden im nächsten Kapitel
-(Kapitel: \ref{section:qualtity}) näher beschrieben.
+(Kapitel \ref{section:qualtity}) näher beschrieben.
 
 
 \section{Qualitätsfeststellung MI}
@@ -332,7 +332,7 @@ Daten nicht zu hoch sein. In der Forschung gibt es jedoch Unterschiedliche Vorga
 Ordnung ist. Mehr Forschung wäre hier von Vorteil. Bei der Art der fehlenden Daten sollte es sich möglichst um MAR Daten 
 handeln. 
 
-Im Zweiten Schritt sollte die zu verwendende Imputations-Methode, sowie die Verwendung von zusätzlichen Variablen geplant 
+Im Zweiten Schritt sollte die zu verwendende Methode für die Behandlung fehlender Daten, sowie die Verwendung von zusätzlichen Variablen geplant 
 werden. 
 Handelt es sich um MCAR Daten, kann der Einsatz einer CCA überlegt werden. Gibt es relevante, zeitnahe Untersuchungen 
 zu den fehlenden Daten, kann auch die Verwendung der Single Imputation in der LOCF-Variante gute Ergebnisse erzielen. 
