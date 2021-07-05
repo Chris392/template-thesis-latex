@@ -120,15 +120,15 @@
 %}
 
 %% Abstract section for paper format.
-%\abstract{
-%    \ifmmtlanguagegerman 
-%        \selectlanguage{ngerman}
-%        \input{kurzfassung}
-%    \else 
-%        \selectlanguage{english}
-%        \input{abstract}
-%    \fi
-%}
+\abstract{
+    \ifmmtlanguagegerman 
+        \selectlanguage{ngerman}
+        \input{kurzfassung}
+    \else 
+        \selectlanguage{english}
+        \input{abstract}
+    \fi
+}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%% START OF THE PAPER %%%%%%%%%%%%%%%%%%%%%%
@@ -255,9 +255,9 @@
 \endgroup
 
 
-    Diese Arbeit hat folgende Länge (gezählt mit texcount): 
+    %Diese Arbeit hat folgende Länge (gezählt mit texcount): 
     %TC:ignore
-    detailtexcount{body}
+    %\detailtexcount{body}
 \fi
 
 

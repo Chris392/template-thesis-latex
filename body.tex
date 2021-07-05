@@ -26,7 +26,7 @@ Qualitätsfeststellung beschrieben.
 
 Angenommen es würde eine Studie über den Zusammenhang zwischen Blutdruck und dem Risiko eines Herzinfarkts geben. 
 Dabei fehlen die Blutdruck Daten bei einigen Herzinfarkt-Patienten. Man kann nun aufgrund der anderen Daten die 
-gesammelt wurden Rückschluss auf die fehlenden Daten ziehen. So können z.B. die fehlenden Blutdruck-Daten einiger 
+gesammelt wurden Rückschlüsse auf die fehlenden Daten ziehen. So können z.B. die fehlenden Blutdruck-Daten einiger 
 Patienten ersetzt werden, indem andere Patienten mit gleichen Eigenschaften gesucht werden. Bei Patienten mit gleichen 
 Eigenschaften (z.B. gleiches Alter, gleicher BMI) steigt auch die Wahrscheinlichkeit, dass der Blutdruck-Wert ähnlich ist. 
 
@@ -34,7 +34,8 @@ Allerdings kann diese Vorgehensweise aufwändig werden. Vor allem, wenn es sehr 
 schwierig werden, einen Patienten mit genau demselben BMI, Alter, Blutdruck etc. zu finden. Daher wird in 
 der MI versucht, anhand der vorhandenen Daten und einer Verteilungsfunktion eine Vermutung über den fehlenden Wert zu 
 bekommen. Man könnte z.B. davon ausgehen, dass die Blutdruckwerte der Bevölkerung Normalverteilt sind. Aufgrund dieser Vermutung 
-kann der Mittelwert aller Blutdruckwerte gebildet und für die fehlenden Daten eingesetzt werden. Für Komplexere Sachverhalte ist 
+kann der Mittelwert aller Blutdruckwerte gebildet und für die fehlenden Daten eingesetzt werden. Es würde sich dabei um eine ``Single Regression`` handeln. \autocite[3]{Shrive2006}
+Für Komplexere Sachverhalte ist 
 dieses Vorgehen allerdings nicht ausreichend. \autocite[1089]{Donders2006}
 
 Um den gesamten Sachverhalt besser darstellen zu können, werden z.B. mehrere voneinander abhängige Regressionsmodelle 
@@ -293,7 +294,7 @@ Neben dem Standarderror, gibt es noch weitere Qualitätskriterien für die MI. E
 \subsection{Simulierte fehlende Daten und P-Value}
 
 Eine einfache Methode zur Qualitätsüberprüfung ist es, einen vollständigen Datensatz zu nehmen und die fehlenden Daten zu 
-simulieren. Nach dieser Vorgehensweise wurde auch die Simulation aus (D. Young-Saver, 2018) durchgeführt. Hierbei wurde 
+simulieren. Nach dieser Vorgehensweise wurde auch die Simulation aus \textcite[]{Young-Saver2018} durchgeführt. Hierbei wurde 
 aus dem Vollständigen Datensatz auf Basis eines randomisierten Verfahrens Daten gelöscht. Daraus folgt, dass man nun die 
 imputierten Daten mit den Daten des Vollständigen Datensatzes vergleichen kann. Ein möglicher Vergleich wäre z.B. die 
 Bestimmung der exakten Übereinstimmungsrate. Hierbei wird der Anteil von exakten Übereinstimmungen zwischen den imputierten 
