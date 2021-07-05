@@ -93,15 +93,15 @@ kombiniert, indem das Arithmetische Mittel der Schätzwerte sowie des Standard E
 \subsection{Standarderror}
 
 Der Standarderror ist ein Maß für die Unsicherheit der 
-geschätzten Werte. \autocite[1098]{Donders2006} Der Standarderror ist somit auch ein Indikator für den Informationsverlust durch fehlende Daten. \autocite[1298]{Hughes2019}
-Angenommen es gibt in einer Studie fehlende Blutdruckwerte. Die Blutdruckwerte werden nun 3x mithilfe verschiedener Stichproben und Parametern anhand einer Regression imputiert.
+geschätzten Werte. \autocite[1098]{Donders2006} Er ist somit auch ein Indikator für den Informationsverlust durch fehlende Daten. \autocite[1298]{Hughes2019}
+Angenommen es gibt in einer Studie fehlende Blutdruckwerte. Die Blutdruckwerte werden nun 3x mithilfe verschiedener Regressionsmodellen imputiert.
 Es entstehen somit 3 komplette Datensätze mit jeweils unterschiedlichen imputierten Blutdruckwerten. Ist der Mittelwert der imputierten Blutdruckwerte zwischen den 3 kompletten
 Datensätzen sehr unterschiedlich, dann wird der Standarderror hoch sein. Daraus kann man schließen, dass es eine hohe Unsicherheit in der Genauigkeit der Blutdruckdaten gibt und
 somit womöglich ein Bias vorhanden ist.   
 
 \subsection{Bias}
 
-Ein Qualitätskriterium für die MI ist der Bias. Unter Bias versteht man einen systematischen Fehler. Dieser Fehler entsteht, 
+Unter Bias versteht man einen systematischen Fehler. Dieser Fehler entsteht, 
 wenn der Einfluss von Eigenschaften über- oder unterbewertet wird. \autocite[2]{Jakobsen2017} Angenommen, der BMI 
 spielt keine Rolle bei der Entstehung von Herz-Kreislauferkrankungen. Sollte eine Studie den BMI als großen Faktor 
 für die Entstehung von Herz-Kreislauferkrankungen miteinbeziehen, ist das Ergebnis vermutlich biased bzw. voreingenommen.
@@ -231,22 +231,23 @@ sich bei den untersuchten Variablen um Zeitrelevante Prozesse handelt.
 \section{Zusätzliche Daten}
 \label{section:additional_data}
 
+Zusätzliche Daten können den Informationsgehalt erhöhen und damit zur Reduzierung des Bias beitragen.
+
 \subsection{Post-Baseline Untersuchungen}
 
-Die Simulation aus \textcite[]{Young-Saver2018} zum Thema akutem Schlaganfall, welche im Kapitel „Single Imputation“ 
-bereits erwähnt wurde, zeigt auch die Bedeutung von Post-Baseline Untersuchungen. Post-Baseline Untersuchungen sind
- Untersuchungen, die nach einem Bestimmtem Ereignis erhoben wurden. Im Falle der Studie wurde der NIH Stroke Scale 
+Die Simulation aus \textcite[]{Young-Saver2018} zum Thema akutem Schlaganfall zeigt die Bedeutung von Post-Baseline Untersuchungen. Post-Baseline Untersuchungen sind
+ Untersuchungen, die nach einem Bestimmtem Ereignis erhoben wurden. Z.B. nach einem vorgefallenem Schlaganfall. Im Falle der Studie wurde der NIH Stroke Scale 
  nach 24 Stunden und der mRS nach 7-10 Tagen erhoben. (der NIH Stroke Scale und der mRS sind beides Bewertungsskalen
   für die Symptome des Patienten). Die MI wurde einmal mit und einmal ohne Daten aus den Post-Baseline Untersuchungen 
-  durchgeführt. Im Ergebnis der Simulation schnitt die Multiple Imputation mit Post-Baseline besser ab als ohne (siehe Abbildung \ref{figure:study})
+  durchgeführt. Im Ergebnis der Simulation schnitt die Multiple Imputation mit Post-Baseline besser ab als ohne. (siehe Abbildung \ref{figure:study})
 
   \begin{figure*}[t]
 	\centering
 	\includegraphics[width=0.9\textwidth]{images/grafik_saver.png}
 	\caption{
 		Die MI mit Post-Baseline Variablen (orange umrahmt) schnitt bei jedem Prozentsatz an fehlenden Daten besser ab als 
-		die MI ohne Post Baseline Variablen (blau umrahmt). Berechnet wurde der P-Value. Je näher der P-Value an 1 liegt, 
-		desto höher ist die Wahrscheinlichkeit, dass die Ergebnisse Zufall sind. Ein niedriger P-Value ist daher anzustreben. 
+		die MI ohne Post Baseline Variablen (blau umrahmt). Die Simulation wurde mittels simulierter fehlender Daten durchgeführt. Berechnet wurde der P-Value.
+		Eine nähere Erläuterung dazu kann in Kapitel \ref{section:qualtity} gefunden werden. 
 		Grafik aus \textcite[3667]{Young-Saver2018}, die Beschriftung sowie die blaue/orange Markierung wurde nachträglich 
 		hinzugefügt.
 	}
@@ -269,24 +270,25 @@ und der Redefluss im Alter von 9 Jahren, ein Binärwert für das Vorhandensein v
 Unter der Miteinbeziehung der Hilfsvariablen bei der MI verringerte sich der Standard Error im Vergleich zur MI ohne Hilfsvariablen von 0.504 auf 0.461. Der FMI (Fraction of Missing Information)
 verringerte sich von 0.724 auf 0.664. \autocite[71]{Madley-Dowd2019} Der FMI ist ein Parameter, der den Verlust an Informationen darstellt. Der FMI kann zwischen 0 und 1 liegen, 
 ein niedriger FMI ist anzustreben.
-\autocite[65]{Madley-Dowd2019} Die Begriffe Standarderror sowie Bias werden im nächsten Kapitel (Kapitel \ref{section:qualtity}) näher beschrieben. 
+\autocite[65]{Madley-Dowd2019} Eine nähere Erläuterung des FMIs kann in \textcite[]{Madley-Dowd2019} gefunden werden. 
 
 
 Man sieht anhand der Reduktion von FMI und Standarderror, dass sich Hilfsvariablen positiv auf die MI auswirken können. Ausschlaggebend für den Effekt von Hilfsvariablen
 ist u.a. ob die Hilfsvariable genügend Information über die fehlenden Werte bereitstellt. \autocite[1302]{Hughes2019} Ein Indikator für den Effekt einer Hilfsvariable auf 
-die MI ist die Reduktion des Standarderrors. In der Studie von \textcite[]{Madley-Dowd2019} reduzierte sich der Standarderror bei der Hinzugabe der Hilfsvariable 
-"IQ im Alter von 8 Jahren" um 7.65\%. Wurde die Hilfsvariable "Learning Disabilities" hinzugefügt, erhöhte sich der Standarderror um 0,8\%. \autocite[71]{Madley-Dowd2019} 
+die MI ist die Reduktion des Standarderrors. 
+
+In der Studie von \textcite[]{Madley-Dowd2019} 
+reduzierte sich der Standarderror bei der Hinzugabe der Hilfsvariable 
+``IQ im Alter von 8 Jahren`` um 7.65\%. Wurde die Hilfsvariable ``Learning Disabilities``  hinzugefügt, erhöhte sich der Standarderror um 0,8\%. \autocite[71]{Madley-Dowd2019} 
 Dies zeigt, dass nicht alle Hilfsvariablen zwingend den Informationsgehalt und damit die Genauigkeit des Ergebnisses verbessern. 
 Eine sorgfältige Überprüfung/Auswahl von Hilfsvariablen ist daher von Vorteil. 
+
+Neben dem Standarderror, gibt es noch weitere Qualitätskriterien für die MI. Einige davon werden im nächsten Kapitel
+(Kapitel: \ref{section:qualtity}) näher beschrieben.
 
 
 \section{Qualitätsfeststellung MI}
 \label{section:qualtity}
-
-Eine ordnungsgemäße Durchführung der MI ist noch keine Garantie dafür, 
-dass das Ergebnis nicht biased ist. Vor allem wenn nicht klar ist, ob es sich bei den verwendeten Daten um MAR oder MNAR 
-Daten handelt. Es gibt einige Möglichkeiten, um die Qualität der MI zu Überprüfen und damit auch eine Abschätzung über einen 
-Möglichen Bias zu geben:
 
 \subsection{Simulierte fehlende Daten und P-Value}
 
@@ -302,6 +304,8 @@ Ein weiterer Wert, mit dem der Unterschied zwischen vollständigem und imputiert
 Der P-Value gibt an, wie groß der Unterschied zwischen zwei Datensätzen ist. Je nachdem, wie groß der gewählte Threshold ist,
 kann daraufhin eine Aussage darüber getroffen werden, ob die beiden Datensätze signifikant oder nicht signifikant unterschiedlich
 sind. 
+
+Signifikante Unterschiede zwischen vollständigem und imputiertem Datensatz sind ein Indikator für einen vorhandenen Bias.
 
 \subsection{Sensitivitätsanalyse}
 
@@ -335,7 +339,7 @@ zu den fehlenden Daten, kann auch die Verwendung der Single Imputation in der LO
 Das Hinzufügen von Post-Baseline Untersuchungen oder Hilfsvariablen kann das Resultat der MI verbessern. 
 
 Nach der Durchführung der MI ist es zu empfehlen, eine Sensitivitätsanalyse durchzuführen. Vor allem, wenn es sich nicht 
-sicher um MAR Daten handelt. Der Standard Error sowie der P-Value sollten nicht zu hoch sein, da hohe Werte auf einen Bias hinweisen können.
+sicher um MAR Daten handelt. Der Standard Error sollte nicht zu hoch sein, da hohe Werte auf einen Bias hinweisen können.
 
 MI ist eines der wichtigsten Werkzeuge für die Behandlung von fehlenden Daten in vielen verschiedenen Bereichen. 
 Wer sich z.B. mit Statistik oder AI beschäftigt, sollte einen Überblick über MI haben. MI ist ein komplexes Thema und 
